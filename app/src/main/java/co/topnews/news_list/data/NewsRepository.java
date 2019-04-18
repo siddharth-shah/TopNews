@@ -1,11 +1,10 @@
 package co.topnews.news_list.data;
 
-import java.util.List;
 import java.util.Map;
 
-import co.topnews.news_list.models.NewsItem;
+import co.topnews.news_list.models.TopHeadlinesResponseItem;
 import io.reactivex.Observable;
 
 public interface NewsRepository {
-    Observable<List<NewsItem>> getTopHeadlines(Map<String, String> queryParams);
+    Observable<TopHeadlinesResponseItem> getTopHeadlines(Map<String, String> queryParams);
 }
