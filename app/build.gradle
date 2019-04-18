@@ -35,5 +35,7 @@ dependencies {
     implementation "io.reactivex.rxjava2:rxjava:2.2.8"
     implementation 'com.squareup.retrofit2:retrofit:2.5.0'
     implementation "com.squareup.moshi:moshi:1.8.0"
+    implementation 'com.squareup.retrofit2:converter-moshi:2.5.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
 
 }
