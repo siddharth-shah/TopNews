@@ -2,6 +2,7 @@ package co.topnews.news_list;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -33,7 +34,11 @@ public class NewsListActivity extends AppCompatActivity implements NewsListView 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
         newsList = findViewById(R.id.news_list);
-        newsList.setLayoutManager(new LinearLayoutManager(this));
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(newsList.getContext(),
+                layoutManager.getOrientation());
+        newsList.addItemDecoration(dividerItemDecoration);
+        newsList.setLayoutManager(layoutManager);
         newsListAdapter = new NewsListAdapter(this);
         newsList.setAdapter(newsListAdapter);
 
