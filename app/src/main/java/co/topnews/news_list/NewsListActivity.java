@@ -2,6 +2,8 @@ package co.topnews.news_list;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import java.util.HashMap;
 import java.util.List;
@@ -13,8 +15,8 @@ import co.topnews.R;
 import co.topnews.core.NewsApplicationComponent;
 import co.topnews.news_list.dagger.DaggerNewsListComponent;
 import co.topnews.news_list.dagger.NewsListViewModule;
-import co.topnews.news_list.data.dagger.NewsRepositoryModule;
 import co.topnews.news_list.data.dagger.NewsListApiModule;
+import co.topnews.news_list.data.dagger.NewsRepositoryModule;
 import co.topnews.news_list.models.NewsItem;
 import co.topnews.news_list.presenter.NewsListPresenter;
 
@@ -23,11 +25,18 @@ public class NewsListActivity extends AppCompatActivity implements NewsListView 
 
     @Inject
     NewsListPresenter presenter;
+    private RecyclerView newsList;
+    private NewsListAdapter newsListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news_list);
+        newsList = findViewById(R.id.news_list);
+        newsList.setLayoutManager(new LinearLayoutManager(this));
+        newsListAdapter = new NewsListAdapter(this);
+        newsList.setAdapter(newsListAdapter);
+
         setupComponent(NewsApplication.getApplicationComponent());
         HashMap<String, String> query = new HashMap<>();
         query.put("apiKey", "158b3705f4ec43ca913cbb7102c83359");
@@ -46,9 +55,18 @@ public class NewsListActivity extends AppCompatActivity implements NewsListView 
                 .inject(this);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.attachView(this);
+    }
+
     @Override
     public void setData(List<NewsItem> newsItems) {
-
+        if (newsListAdapter != null) {
+            newsListAdapter.setData(newsItems);
+        }
     }
 
     @Override
