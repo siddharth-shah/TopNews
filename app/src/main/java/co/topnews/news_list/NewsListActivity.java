@@ -3,6 +3,7 @@ package co.topnews.news_list;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
@@ -39,6 +40,8 @@ public class NewsListActivity extends AppCompatActivity implements NewsListView 
                 layoutManager.getOrientation());
         newsList.addItemDecoration(dividerItemDecoration);
         newsList.setLayoutManager(layoutManager);
+        final EndlessRecyclerViewOnScrollListener endlessRecyclerViewOnScrollListener = setupScrollListener(layoutManager);
+        newsList.addOnScrollListener(endlessRecyclerViewOnScrollListener);
         newsListAdapter = new NewsListAdapter(this);
         newsList.setAdapter(newsListAdapter);
 
@@ -60,6 +63,16 @@ public class NewsListActivity extends AppCompatActivity implements NewsListView 
                 .inject(this);
     }
 
+
+    private EndlessRecyclerViewOnScrollListener setupScrollListener(
+            RecyclerView.LayoutManager layoutManager) {
+        return new EndlessRecyclerViewOnScrollListener((LinearLayoutManager) layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+
+            }
+        };
+    }
 
     @Override
     protected void onStart() {
