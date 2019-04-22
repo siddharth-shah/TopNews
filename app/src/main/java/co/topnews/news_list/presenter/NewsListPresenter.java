@@ -2,10 +2,13 @@ package co.topnews.news_list.presenter;
 
 import java.util.Map;
 
+import co.topnews.news_list.NewsListView;
+
 public interface NewsListPresenter {
 
-    void getTopHeadlines(Map<String, String> queryParams);
+    void attachView(NewsListView view);
 
+    void getTopHeadlines(Map<String, String> queryParams);
 
 
 }

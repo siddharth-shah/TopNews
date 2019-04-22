@@ -6,6 +6,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,7 @@ public class NewsListAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         switch (getItemViewType(i)) {
             case 1:
-                return new NewsListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.new_list_item, viewGroup));
+                return new NewsListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.new_list_item, viewGroup, false));
             default:
                 throw new IllegalArgumentException("View type not supported");
 
@@ -40,6 +42,7 @@ public class NewsListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         if (viewHolder instanceof NewsListItemViewHolder) {
             final NewsItem newsItem = newsItemList.get(i);
+            Picasso.get().load(newsItem.getUrlToImage()).into(((NewsListItemViewHolder) viewHolder).getNewsImage());
             ((NewsListItemViewHolder) viewHolder).getNewsTitle().setText(newsItem.getTitle());
             ((NewsListItemViewHolder) viewHolder).getNewsDescription().setText(newsItem.getDescription());
         }
