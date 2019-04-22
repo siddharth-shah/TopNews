@@ -10,5 +10,6 @@ public interface NewsListPresenter {
 
     void getTopHeadlines(Map<String, String> queryParams);
 
+    void onReachEndOfPageLoadMore();
 
 }
