@@ -1,4 +1,4 @@
-package co.topnews.news_list.data;
+package co.topnews.news_list.data.repository;
 
 import java.util.Map;
 
