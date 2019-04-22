@@ -4,8 +4,10 @@ import javax.inject.Singleton;
 
 import co.topnews.core.network.ApiModule;
 import co.topnews.core.network.ClientModule;
-import co.topnews.news_list.NewsListActivity;
 import dagger.Component;
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
 
 @Singleton
 @Component(modules = {NewsApplicationModule.class,
@@ -13,6 +15,12 @@ import dagger.Component;
         ApiModule.class})
 public interface NewsApplicationComponent {
 
-    void inject(NewsListActivity activity);
+
+    OkHttpClient okHttpClient();
+
+    Retrofit retrofit();
+
+    HttpUrl endpoint();
+
 
 }

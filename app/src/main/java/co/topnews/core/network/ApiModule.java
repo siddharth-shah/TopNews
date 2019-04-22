@@ -1,4 +1,4 @@
-package co.topnews.core;
+package co.topnews.core.network;
 
 import com.squareup.moshi.Moshi;
 
@@ -17,8 +17,8 @@ import retrofit2.converter.moshi.MoshiConverterFactory;
 @Module
 public class ApiModule {
 
-    @Provides
     @Singleton
+    @Provides
     public Retrofit provideRetrofit(HttpUrl url, Converter.Factory factory, CallAdapter.Factory callAdapterFactory,
                                     OkHttpClient httpClient) {
         return new Retrofit.Builder()
@@ -30,8 +30,8 @@ public class ApiModule {
 
     }
 
-    @Provides
     @Singleton
+    @Provides
     public Converter.Factory provideMoshiConverterFactory(Moshi moshi) {
         return MoshiConverterFactory.create(moshi);
     }
@@ -42,8 +42,8 @@ public class ApiModule {
         return new Moshi.Builder().build();
     }
 
-    @Provides
     @Singleton
+    @Provides
     public CallAdapter.Factory provideRxJavaCallAdapterFactory() {
         return RxJava2CallAdapterFactory.create();
     }
