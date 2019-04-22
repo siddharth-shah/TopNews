@@ -55,6 +55,7 @@ public class NewsListAdapter extends RecyclerView.Adapter {
         }
 
         newsItemList.addAll(newsItems);
+        notifyDataSetChanged();
 
 
     }
