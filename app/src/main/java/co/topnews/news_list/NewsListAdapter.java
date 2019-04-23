@@ -31,6 +31,8 @@ public class NewsListAdapter extends RecyclerView.Adapter {
         switch (getItemViewType(i)) {
             case 1:
                 return new NewsListItemViewHolder(LayoutInflater.from(context).inflate(R.layout.new_list_item, viewGroup, false));
+            case 2:
+                return new ProgressbarViewHolder(LayoutInflater.from(context).inflate(R.id.progress_bar, viewGroup, false));
             default:
                 throw new IllegalArgumentException("View type not supported");
 
@@ -40,6 +42,10 @@ public class NewsListAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
+        if (viewHolder instanceof ProgressbarViewHolder) {
+            return;
+        }
+
         if (viewHolder instanceof NewsListItemViewHolder) {
             final NewsItem newsItem = newsItemList.get(i);
             Picasso.get().load(newsItem.getUrlToImage()).into(((NewsListItemViewHolder) viewHolder).getNewsImage());
@@ -72,6 +78,6 @@ public class NewsListAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        return NEWS_ITEM;
+        return newsItemList.get(position) == null ? LOADING_MORE : NEWS_ITEM;
     }
 }
